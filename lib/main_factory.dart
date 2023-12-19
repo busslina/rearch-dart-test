@@ -3,9 +3,6 @@ import 'package:rearch/rearch.dart';
 void main(List<String> arguments) {
   final capsuleContainer = CapsuleContainer();
 
-  // print(capsuleContainer.read(_todayCapsule));
-  // print(capsuleContainer.read(_todayCapsule));
-
   print(capsuleContainer.read(_monthAsStringFactory)(11));
   print(' ');
 
