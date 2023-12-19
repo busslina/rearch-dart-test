@@ -33,18 +33,6 @@ String _getMonthAsString(int month) {
   };
 }
 
-// String Function(int) _monthAsStringFactory(CapsuleHandle use) {
-//   print('_monthAsStringFactory() -- I');
-
-//   return (int month) {
-//     print('_monthAsStringFactory() -- II -- $month');
-//     return use.memo(() {
-//       print('_monthAsStringFactory() -- III -- $month');
-//       return _getMonthAsString(month);
-//     }, [month]);
-//   };
-// }
-
 (String Function(int), void Function()) _monthAsStringFactory(
     CapsuleHandle use) {
   final cache = use.value(<int, String>{});
