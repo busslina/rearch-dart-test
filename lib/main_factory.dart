@@ -3,13 +3,13 @@ import 'package:rearch/rearch.dart';
 void main(List<String> arguments) {
   final capsuleContainer = CapsuleContainer();
 
-  print(capsuleContainer.read(_monthAsStringFactory)(11));
+  print(capsuleContainer.read(_monthAsStringFactory).$1(11));
   print(' ');
 
-  print(capsuleContainer.read(_monthAsStringFactory)(10));
+  print(capsuleContainer.read(_monthAsStringFactory).$1(10));
   print(' ');
 
-  print(capsuleContainer.read(_monthAsStringFactory)(11));
+  print(capsuleContainer.read(_monthAsStringFactory).$1(11));
   print(' ');
 }
 
@@ -33,14 +33,28 @@ String _getMonthAsString(int month) {
   };
 }
 
-String Function(int) _monthAsStringFactory(CapsuleHandle use) {
-  print('_monthAsStringFactory() -- I');
+// String Function(int) _monthAsStringFactory(CapsuleHandle use) {
+//   print('_monthAsStringFactory() -- I');
 
-  return (int month) {
-    print('_monthAsStringFactory() -- II -- $month');
-    return use.memo(() {
-      print('_monthAsStringFactory() -- III -- $month');
-      return _getMonthAsString(month);
-    }, [month]);
-  };
+//   return (int month) {
+//     print('_monthAsStringFactory() -- II -- $month');
+//     return use.memo(() {
+//       print('_monthAsStringFactory() -- III -- $month');
+//       return _getMonthAsString(month);
+//     }, [month]);
+//   };
+// }
+
+(String Function(int), void Function()) _monthAsStringFactory(
+    CapsuleHandle use) {
+  final cache = use.value(<int, String>{});
+  final rebuild = use.rebuilder();
+
+  return (
+    (month) => cache.putIfAbsent(month, () => _getMonthAsString(month)),
+    () {
+      cache.clear();
+      rebuild();
+    }
+  );
 }
