@@ -1,18 +1,7 @@
 import 'package:rearch/rearch.dart';
 
-final capsuleContainer = CapsuleContainer();
-
 void main(List<String> arguments) {
-  // print(capsuleContainer.read(todayCapsule));
-  // print(capsuleContainer.read(todayCapsule));
-  // print(capsuleContainer.read(todayCapsule));
-  // print(capsuleContainer.read(todayCapsule));
-  // print(capsuleContainer.read(todayCapsule));
-  // print(capsuleContainer.read(todayCapsule));
-  // print(capsuleContainer.read(todayCapsule));
-
-  // print(today());
-  // print(today());
+  final capsuleContainer = CapsuleContainer();
 
   var (today, dayIncrementer) = capsuleContainer.read(todayCapsule);
   print(today);
