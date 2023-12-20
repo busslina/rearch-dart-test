@@ -3,17 +3,23 @@ import 'package:rearch/rearch.dart';
 void main(List<String> arguments) {
   final capsuleContainer = CapsuleContainer();
 
+  // Listener
+  final disposeListener = capsuleContainer.listen((use) {
+    print('Listener: ${use(todayCapsule).$1}');
+  });
+
   var (today, dayIncrementer) = capsuleContainer.read(todayCapsule);
   print(today);
-  dayIncrementer();
 
+  dayIncrementer();
   (today, dayIncrementer) = capsuleContainer.read(todayCapsule);
   print(today);
-  dayIncrementer();
 
+  disposeListener();
+
+  dayIncrementer();
   (today, dayIncrementer) = capsuleContainer.read(todayCapsule);
   print(today);
-  dayIncrementer();
 }
 
 (int, void Function()) yearCapsule(CapsuleHandle use) {
@@ -67,7 +73,5 @@ void main(List<String> arguments) {
   final (month, _) = use(monthCapsule);
   final (year, _) = use(yearCapsule);
 
-  final today = use.memo(() => '$day/$month/$year', [day, month, year]);
-
-  return (today, dayIncrementer);
+  return ('$day/$month/$year', dayIncrementer);
 }
