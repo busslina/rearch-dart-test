@@ -15,6 +15,12 @@
             "request": "launch",
             "type": "dart",
             "program": "lib/main_factory.dart"
+        },
+        {
+            "name": "Dependencies",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dependencies.dart"
         }
     ]
 }
